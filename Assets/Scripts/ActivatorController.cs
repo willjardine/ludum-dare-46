@@ -8,6 +8,8 @@ public class ActivatorController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite defaultImage;
     public Sprite pressedImage;
+    public Animator anim;
+    public string trigger = "Up";
 
     public KeyCode keyToPress;
 
@@ -24,6 +26,7 @@ public class ActivatorController : MonoBehaviour
             {
                 LevelManager.instance.WaitForNextMove();
                 spriteRenderer.sprite = pressedImage;
+                anim.SetTrigger(trigger);
             }
         }
         if (Input.GetKeyUp(keyToPress))

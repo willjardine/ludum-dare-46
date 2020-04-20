@@ -29,7 +29,7 @@ public class LevelResults : MonoBehaviour
 
         float totalHit = LevelManager.instance.totalNormal + LevelManager.instance.totalGood + LevelManager.instance.totalPerfect;
         float percentHit = (totalHit / LevelManager.instance.total) * 100f;
-        textHitPercent.text = percentHit.ToString("F1") + "%";
+        textHitPercent.text = percentHit.ToString("F0") + "%";
 
         string rank = "F";
         if (percentHit >= 85)

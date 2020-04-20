@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
 
     public static LevelManager instance;
 
+    public GameObject activators;
     public AudioSource music;
     public MoveScroller moveScroller;
     public LevelResults levelResults;
@@ -41,6 +43,7 @@ public class LevelManager : MonoBehaviour
         totalGood = 0;
         totalPerfect = 0;
         totalMissed = 0;
+        activators.SetActive(false);
     }
 
     void Update()
@@ -51,6 +54,7 @@ public class LevelManager : MonoBehaviour
             {
 
                 isPlaying = true;
+                activators.SetActive(true);
                 moveScroller.Play();
                 music.Play();
             }
@@ -58,8 +62,16 @@ public class LevelManager : MonoBehaviour
         else if (music.isPlaying == false && levelResults.gameObject.activeInHierarchy == false)
         {
             isGameOver = true;
+            activators.SetActive(false);
             levelResults.UpdateResults();
             levelResults.gameObject.SetActive(true);
+        }
+        else if (isGameOver)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 
